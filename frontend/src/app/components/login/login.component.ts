@@ -25,8 +25,14 @@ export class LoginComponent {
       return;
     }
     this.authService.login({ username: this.username, password: this.password }).subscribe({
-      next: () => {
-        this.router.navigate(['/']); // Navigate to home on success
+      next: (response) => {
+        if (response.tfa_required) {
+          // Navigate to the 2FA verification page
+          this.router.navigate(['/login/2fa']);
+        } else {
+          // Navigate to home on successful login without 2FA
+          this.router.navigate(['/']);
+        }
       },
       error: (err) => {
         this.error = err.error.msg || 'Login failed';
