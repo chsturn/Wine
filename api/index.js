@@ -2,12 +2,25 @@ const express = require('express');
 const cors = require('cors');
 const fs = require('fs');
 const path = require('path');
+const connectDB = require('./config/db');
+
+// Load env vars
+require('dotenv').config();
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
+// Connect to Database
+connectDB();
+
+// Init Middleware
 app.use(cors());
+app.use(express.json());
 
+// Define Routes
+app.use('/api/users', require('./routes/users'));
+
+// The original /api/wines route, for now
 app.get('/api/wines', (req, res) => {
   const winesFilePath = path.join(__dirname, 'wines.json');
   fs.readFile(winesFilePath, 'utf8', (err, data) => {
