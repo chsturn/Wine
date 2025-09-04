@@ -3,16 +3,41 @@ import { of, throwError } from 'rxjs';
 
 import { WineListComponent } from './wine-list.component';
 import { WineService } from '../wine.service';
-import { Wine } from '../wine';
+import { Wine } from '../models/wine.model'; // Updated import path
 
 describe('WineListComponent', () => {
   let component: WineListComponent;
   let fixture: ComponentFixture<WineListComponent>;
   let mockWineService: jasmine.SpyObj<WineService>;
 
+  // Updated dummy data to match the new model
   const dummyWines: Wine[] = [
-    { id: 1, name: 'Test Wine 1', year: 2020, type: 'Red', varietal: 'Test Varietal', rating: 90, description: 'Desc 1', imageUrl: '' },
-    { id: 2, name: 'Test Wine 2', year: 2021, type: 'White', varietal: 'Test Varietal 2', rating: 95, description: 'Desc 2', imageUrl: '' }
+    {
+      _id: '1',
+      name: 'Test Wine 1',
+      year: 2020,
+      winery: 'Test Winery',
+      region: 'Test Region',
+      grapeVariety: 'Test Grape',
+      aroma: ['cherry', 'vanilla'],
+      taste: ['full-bodied'],
+      foodPairing: ['steak'],
+      alcoholPercentage: 14,
+      description: 'A test wine.'
+    },
+    {
+      _id: '2',
+      name: 'Test Wine 2',
+      year: 2021,
+      winery: 'Another Winery',
+      region: 'Another Region',
+      grapeVariety: 'Another Grape',
+      aroma: ['citrus'],
+      taste: ['crisp'],
+      foodPairing: ['fish'],
+      alcoholPercentage: 12.5,
+      description: 'Another test wine.'
+    }
   ];
 
   beforeEach(async () => {

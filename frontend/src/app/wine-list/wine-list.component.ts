@@ -1,6 +1,6 @@
 import { Component, OnInit, inject, signal, WritableSignal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Wine } from '../wine';
+import { Wine } from '../models/wine.model';
 import { WineService } from '../wine.service';
 
 @Component({

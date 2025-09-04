@@ -1,0 +1,76 @@
+<div class="form-container">
+  <h2>Add New Wine</h2>
+  <form [formGroup]="wineForm" (ngSubmit)="onSubmit()">
+
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input id="name" type="text" formControlName="name">
+    </div>
+
+    <div class="form-group">
+      <label for="year">Year</label>
+      <input id="year" type="number" formControlName="year">
+    </div>
+
+    <div class="form-group">
+      <label for="winery">Winery</label>
+      <input id="winery" type="text" formControlName="winery">
+    </div>
+
+    <div class="form-group">
+      <label for="region">Region</label>
+      <input id="region" type="text" formControlName="region">
+    </div>
+
+    <div class="form-group">
+      <label for="grapeVariety">Grape Variety</label>
+      <input id="grapeVariety" type="text" formControlName="grapeVariety">
+    </div>
+
+    <div class="form-group">
+      <label for="aroma">Aroma (comma-separated)</label>
+      <input id="aroma" type="text" formControlName="aroma">
+    </div>
+
+    <div class="form-group">
+      <label for="taste">Taste (comma-separated)</label>
+      <input id="taste" type="text" formControlName="taste">
+    </div>
+
+    <div class="form-group">
+      <label for="foodPairing">Food Pairing (comma-separated)</label>
+      <input id="foodPairing" type="text" formControlName="foodPairing">
+    </div>
+
+    <div class="form-group">
+      <label for="alcoholPercentage">Alcohol %</label>
+      <input id="alcoholPercentage" type="number" formControlName="alcoholPercentage">
+    </div>
+
+    <div class="form-group">
+      <label for="price">Price</label>
+      <input id="price" type="number" formControlName="price">
+    </div>
+
+    <div formGroupName="oakAging" class="nested-form-group">
+      <h4>Oak Aging</h4>
+      <div class="form-group">
+        <label for="oakType">Oak Type</label>
+        <input id="oakType" type="text" formControlName="oakType">
+      </div>
+      <div class="form-group">
+        <label for="durationMonths">Duration (Months)</label>
+        <input id="durationMonths" type="number" formControlName="durationMonths">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea id="description" formControlName="description" rows="4"></textarea>
+    </div>
+
+    <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+
+    <button type="submit" [disabled]="wineForm.invalid">Add Wine</button>
+  </form>
+</div>
