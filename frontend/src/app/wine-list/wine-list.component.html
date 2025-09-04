@@ -1,0 +1,21 @@
+<h2>Wine List</h2>
+
+<div *ngIf="error()" class="error">
+  {{ error() }}
+</div>
+
+<div *ngIf="wines().length > 0; else noWines" class="wine-grid">
+  <div *ngFor="let wine of wines()" class="wine-card">
+    <img [src]="wine.imageUrl" [alt]="wine.name" class="wine-image">
+    <div class="wine-details">
+      <h3>{{ wine.name }}</h3>
+      <p>{{ wine.varietal }} - {{ wine.year }}</p>
+      <p>Rating: {{ wine.rating }}</p>
+      <p>{{ wine.description }}</p>
+    </div>
+  </div>
+</div>
+
+<ng-template #noWines>
+  <p>No wines to display. Loading...</p>
+</ng-template>
