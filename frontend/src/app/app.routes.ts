@@ -5,6 +5,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { TwoFactorSetupComponent } from './components/two-factor-setup/two-factor-setup.component';
 import { Login2faComponent } from './components/login-2fa/login-2fa.component';
 import { WineFormComponent } from './components/wine-form/wine-form.component';
+import { LabelUploadComponent } from './components/label-upload/label-upload.component';
 // We should add an AuthGuard here in a real app
 // import { AuthGuard } from './auth.guard';
 
@@ -16,6 +17,11 @@ export const routes: Routes = [
   {
     path: 'wines/new',
     component: WineFormComponent,
+    // canActivate: [AuthGuard]
+  },
+  {
+    path: 'wines/upload',
+    component: LabelUploadComponent,
     // canActivate: [AuthGuard]
   },
   {

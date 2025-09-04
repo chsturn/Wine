@@ -16,10 +16,23 @@ export class WineService {
     return this.http.get<Wine[]>(this.apiUrl);
   }
 
+  private aiApiUrl = 'http://localhost:3000/api/ai';
+
   createWine(wine: Wine): Observable<Wine> {
     const headers = new HttpHeaders({
       'x-auth-token': this.authService.getToken() || ''
     });
     return this.http.post<Wine>(this.apiUrl, wine, { headers });
+  }
+
+  analyzeLabel(file: File): Observable<Partial<Wine>> {
+    const formData = new FormData();
+    formData.append('labelImage', file);
+
+    const headers = new HttpHeaders({
+      'x-auth-token': this.authService.getToken() || ''
+    });
+
+    return this.http.post<Partial<Wine>>(`${this.aiApiUrl}/analyze-label`, formData, { headers });
   }
 }

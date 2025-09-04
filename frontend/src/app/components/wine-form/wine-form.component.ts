@@ -1,8 +1,9 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { WineService } from '../../wine.service';
+import { WineFormStateService } from '../../wine-form-state.service';
 import { Wine } from '../../models/wine.model';
 
 @Component({
@@ -12,13 +13,14 @@ import { Wine } from '../../models/wine.model';
   templateUrl: './wine-form.component.html',
   styleUrls: ['./wine-form.component.css']
 })
-export class WineFormComponent {
+export class WineFormComponent implements OnInit {
   wineForm: FormGroup;
   error: string | null = null;
 
   private fb = inject(FormBuilder);
   private wineService = inject(WineService);
   private router = inject(Router);
+  private formStateService = inject(WineFormStateService);
 
   constructor() {
     this.wineForm = this.fb.group({
@@ -38,6 +40,20 @@ export class WineFormComponent {
         durationMonths: [null]
       })
     });
+  }
+
+  ngOnInit(): void {
+    const prefillData = this.formStateService.getAndClearWineData();
+    if (prefillData) {
+      // Convert arrays to comma-separated strings for the form
+      const formData = {
+        ...prefillData,
+        aroma: prefillData.aroma?.join(', '),
+        taste: prefillData.taste?.join(', '),
+        foodPairing: prefillData.foodPairing?.join(', '),
+      };
+      this.wineForm.patchValue(formData);
+    }
   }
 
   onSubmit(): void {

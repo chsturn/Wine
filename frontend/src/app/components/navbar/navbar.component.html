@@ -18,7 +18,10 @@
     <!-- Show if user IS logged in -->
     <ng-container *ngIf="isLoggedIn()">
       <li class="nav-item">
-        <a class="nav-link" routerLink="/wines/new" routerLinkActive="active">Add Wine</a>
+        <a class="nav-link" routerLink="/wines/upload" routerLinkActive="active">Upload Label</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/wines/new" routerLinkActive="active">Add Manually</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" routerLink="/settings/security" routerLinkActive="active">Settings</a>

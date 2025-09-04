@@ -18,6 +18,7 @@ app.use(express.json());
 // Define Routes
 app.use('/api/users', require('./routes/users'));
 app.use('/api/wines', require('./routes/wines'));
+app.use('/api/ai', require('./routes/ai'));
 
 // Start the server only if this file is run directly
 if (require.main === module) {
