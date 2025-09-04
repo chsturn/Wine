@@ -21,6 +21,11 @@ app.get('/api/wines', (req, res) => {
   });
 });
 
-app.listen(port, () => {
-  console.log(`Server listening at http://localhost:${port}`);
-});
+// Start the server only if this file is run directly
+if (require.main === module) {
+  app.listen(port, () => {
+    console.log(`Server listening at http://localhost:${port}`);
+  });
+}
+
+module.exports = app;
