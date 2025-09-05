@@ -1,5 +1,6 @@
 /* Reusing styles from login.component.css */
 .form-container {
+  width: 90%;
   max-width: 400px;
   margin: 2rem auto;
   padding: 2rem;

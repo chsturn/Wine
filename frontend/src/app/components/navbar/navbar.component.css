@@ -1,33 +1,42 @@
+/* Mobile First Styles */
 .navbar {
   display: flex;
+  flex-wrap: wrap; /* Allow items to wrap to the next line */
   justify-content: space-between;
   align-items: center;
   background-color: #333;
-  padding: 0.5rem 1rem;
+  padding: 1rem; /* Increase padding for easier tapping */
   color: white;
+  gap: 1rem; /* Add gap between brand and nav links when they wrap */
 }
 
 .navbar-brand {
   font-size: 1.5rem;
   color: white;
   text-decoration: none;
+  flex-shrink: 0; /* Prevent the brand from shrinking */
 }
 
 .navbar-nav {
   list-style: none;
   display: flex;
+  flex-wrap: wrap; /* Allow nav items to wrap */
+  justify-content: center; /* Center items when they wrap */
   margin: 0;
   padding: 0;
+  gap: 0.5rem 1rem; /* Add gap for wrapped items */
 }
 
 .nav-item {
-  margin-left: 1rem;
+  margin-left: 0; /* Remove fixed margin */
 }
 
 .nav-link {
   color: white;
   text-decoration: none;
   padding: 0.5rem;
+  display: block; /* Make links easier to tap */
+  text-align: center;
 }
 
 .nav-link.active {
@@ -41,10 +50,26 @@
   color: white;
   padding: 0.5rem;
   font-family: inherit;
-  font-size: inherit;
+  font-size: 1rem; /* Ensure consistent font size */
   cursor: pointer;
 }
 
 .nav-link-button:hover {
   text-decoration: underline;
+}
+
+/* Tablet and Desktop Styles */
+@media (min-width: 768px) {
+  .navbar {
+    flex-wrap: nowrap; /* Prevent wrapping on larger screens */
+    padding: 0.5rem 1rem;
+  }
+
+  .navbar-nav {
+    justify-content: flex-end; /* Align to the right */
+  }
+
+  .nav-item {
+    margin-left: 1rem; /* Restore left margin */
+  }
 }
