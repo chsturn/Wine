@@ -17,6 +17,11 @@ const UserSchema = new mongoose.Schema({
   twoFactorEnabled: {
     type: Boolean,
     default: false
+  },
+  role: {
+    type: String,
+    enum: ['User', 'Editor', 'Admin'],
+    default: 'User'
   }
 });
 

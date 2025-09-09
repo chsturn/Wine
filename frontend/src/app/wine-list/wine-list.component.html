@@ -13,6 +13,11 @@
       <p><strong>Grape:</strong> {{ wine.grapeVariety }}</p>
       <p><strong>Alcohol:</strong> {{ wine.alcoholPercentage }}%</p>
       <p><strong>Description:</strong> {{ wine.description }}</p>
+
+      <div *ngIf="isEditor()" class="card-actions">
+        <button class="btn-edit">Edit</button>
+        <button class="btn-delete" (click)="deleteWine(wine._id!)">Delete</button>
+      </div>
     </div>
   </div>
 </div>

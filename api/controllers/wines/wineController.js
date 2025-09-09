@@ -18,6 +18,38 @@ exports.createWine = async (req, res) => {
   }
 };
 
+// @desc    Update a wine
+exports.updateWine = async (req, res) => {
+  try {
+    let wine = await Wine.findById(req.params.id);
+    if (!wine) {
+      return res.status(404).json({ msg: 'Wine not found' });
+    }
+
+    wine = await Wine.findByIdAndUpdate(req.params.id, { $set: req.body }, { new: true });
+    res.json(wine);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+};
+
+// @desc    Delete a wine
+exports.deleteWine = async (req, res) => {
+  try {
+    const wine = await Wine.findById(req.params.id);
+    if (!wine) {
+      return res.status(404).json({ msg: 'Wine not found' });
+    }
+
+    await wine.remove();
+    res.json({ msg: 'Wine removed' });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+};
+
 // @desc    Get all wines
 exports.getAllWines = async (req, res) => {
   try {

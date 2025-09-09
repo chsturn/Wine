@@ -1,0 +1,30 @@
+<div class="management-container">
+  <h2>User Management</h2>
+
+  <div *ngIf="error()" class="alert alert-danger">{{ error() }}</div>
+
+  <div class="user-table-container">
+    <table class="user-table">
+      <thead>
+        <tr>
+          <th>Username</th>
+          <th>Role</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users()">
+          <td>{{ user.username }}</td>
+          <td>
+            <select [value]="user.role" (change)="onRoleChange(user, $event)">
+              <option *ngFor="let role of roles" [value]="role">{{ role }}</option>
+            </select>
+          </td>
+          <td>
+            <button class="btn-delete" (click)="deleteUser(user._id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

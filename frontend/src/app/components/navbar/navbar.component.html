@@ -17,12 +17,23 @@
 
     <!-- Show if user IS logged in -->
     <ng-container *ngIf="isLoggedIn()">
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/wines/upload" routerLinkActive="active">Upload Label</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/wines/new" routerLinkActive="active">Add Manually</a>
-      </li>
+      <!-- Editor & Admin links -->
+      <ng-container *ngIf="isEditor()">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/wines/upload" routerLinkActive="active">Upload Label</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/wines/new" routerLinkActive="active">Add Manually</a>
+        </li>
+      </ng-container>
+
+      <!-- Admin only links -->
+      <ng-container *ngIf="isAdmin()">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/admin/users" routerLinkActive="active">User Management</a>
+        </li>
+      </ng-container>
+
       <li class="nav-item">
         <a class="nav-link" routerLink="/settings/security" routerLinkActive="active">Settings</a>
       </li>

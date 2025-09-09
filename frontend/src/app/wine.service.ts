@@ -35,4 +35,11 @@ export class WineService {
 
     return this.http.post<Partial<Wine>>(`${this.aiApiUrl}/analyze-label`, formData, { headers });
   }
+
+  deleteWine(id: string): Observable<{ msg: string }> {
+    const headers = new HttpHeaders({
+      'x-auth-token': this.authService.getToken() || ''
+    });
+    return this.http.delete<{ msg: string }>(`${this.apiUrl}/${id}`, { headers });
+  }
 }

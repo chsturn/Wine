@@ -1,4 +1,6 @@
 export interface User {
+  _id?: string;
   username: string;
-  password?: string; // Password is optional on the frontend model
+  password?: string; // Optional on the frontend model
+  role?: string;
 }

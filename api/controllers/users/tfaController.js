@@ -24,7 +24,7 @@ exports.login2FA = async (req, res) => {
             token: token,
         });
         if (verified) {
-            const payload = { user: { id: user.id } };
+            const payload = { user: { id: user.id, role: user.role } };
             jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1h' }, (err, finalToken) => {
                 if (err) throw err;
                 res.json({ token: finalToken });

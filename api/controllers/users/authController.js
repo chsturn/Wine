@@ -40,7 +40,7 @@ exports.login = async (req, res) => {
       const tfaToken = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '5m' });
       return res.json({ tfa_required: true, tfa_token: tfaToken });
     }
-    const payload = { user: { id: user.id } };
+    const payload = { user: { id: user.id, role: user.role } };
     jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1h' }, (err, token) => {
       if (err) throw err;
       res.json({ token });

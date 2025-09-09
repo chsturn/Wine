@@ -6,8 +6,9 @@ import { TwoFactorSetupComponent } from './components/two-factor-setup/two-facto
 import { Login2faComponent } from './components/login-2fa/login-2fa.component';
 import { WineFormComponent } from './components/wine-form/wine-form.component';
 import { LabelUploadComponent } from './components/label-upload/label-upload.component';
-// We should add an AuthGuard here in a real app
-// import { AuthGuard } from './auth.guard';
+import { UserManagementComponent } from './components/user-management/user-management.component';
+import { adminGuard } from './admin.guard';
+import { authGuard } from './auth.guard'; // I need to create this guard too
 
 export const routes: Routes = [
   { path: '', component: WineListComponent },
@@ -17,17 +18,22 @@ export const routes: Routes = [
   {
     path: 'wines/new',
     component: WineFormComponent,
-    // canActivate: [AuthGuard]
+    canActivate: [authGuard]
   },
   {
     path: 'wines/upload',
     component: LabelUploadComponent,
-    // canActivate: [AuthGuard]
+    canActivate: [authGuard]
   },
   {
     path: 'settings/security',
     component: TwoFactorSetupComponent,
-    // canActivate: [AuthGuard]
+    canActivate: [authGuard]
+  },
+  {
+    path: 'admin/users',
+    component: UserManagementComponent,
+    canActivate: [adminGuard]
   },
   // Redirect any other path to home
   { path: '**', redirectTo: '' }

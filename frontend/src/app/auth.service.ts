@@ -1,13 +1,22 @@
 import { Injectable, signal, computed, effect, inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
+import { jwtDecode } from 'jwt-decode';
 import { User } from './models/user.model';
 import { AuthResponse } from './models/auth-response.model';
 
-// Define a more specific type for the login response
 interface LoginResponse extends AuthResponse {
   tfa_required?: boolean;
   tfa_token?: string;
+}
+
+interface DecodedToken {
+  user: {
+    id: string;
+    role: string;
+  };
+  iat: number;
+  exp: number;
 }
 
 @Injectable({
@@ -19,12 +28,16 @@ export class AuthService {
 
   private token = signal<string | null>(localStorage.getItem('token'));
   private tfaToken = signal<string | null>(null);
+  private userRole = signal<string | null>(this.getRoleFromToken(this.token()));
 
   isLoggedIn = computed(() => this.token() !== null);
+  isAdmin = computed(() => this.userRole() === 'Admin');
+  isEditor = computed(() => this.userRole() === 'Editor' || this.userRole() === 'Admin');
 
   constructor() {
     effect(() => {
       const currentToken = this.token();
+      this.userRole.set(this.getRoleFromToken(currentToken));
       if (currentToken) {
         localStorage.setItem('token', currentToken);
       } else {
@@ -33,10 +46,19 @@ export class AuthService {
     });
   }
 
+  private getRoleFromToken(token: string | null): string | null {
+    if (!token) return null;
+    try {
+      const decodedToken: DecodedToken = jwtDecode(token);
+      return decodedToken.user.role;
+    } catch (error) {
+      console.error('Failed to decode token', error);
+      return null;
+    }
+  }
+
   private getAuthHeaders(): HttpHeaders {
-    return new HttpHeaders({
-      'x-auth-token': this.getToken() || ''
-    });
+    return new HttpHeaders({ 'x-auth-token': this.getToken() || '' });
   }
 
   register(user: User): Observable<{ msg: string }> {
@@ -63,7 +85,7 @@ export class AuthService {
     return this.http.post<AuthResponse>(`${this.apiUrl}/2fa/login`, { tfa_token: tempToken, token: tfaCode }).pipe(
       tap(response => {
         this.token.set(response.token);
-        this.tfaToken.set(null); // Clear temporary token
+        this.tfaToken.set(null);
       })
     );
   }
@@ -76,8 +98,6 @@ export class AuthService {
   getToken(): string | null {
     return this.token();
   }
-
-  // --- 2FA Management Methods ---
 
   setup2FA(): Observable<{ qrCodeUrl: string }> {
     return this.http.post<{ qrCodeUrl: string }>(`${this.apiUrl}/2fa/setup`, {}, { headers: this.getAuthHeaders() });
