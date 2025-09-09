@@ -1,0 +1,16 @@
+<div class="nearby-container">
+  <h2>Wineries Near You</h2>
+  <p>This map shows wineries based on your location. Pan and zoom to explore.</p>
+
+  <div *ngIf="error()" class="alert alert-warning">{{ error() }}</div>
+
+  <div class="map-wrapper">
+    <app-map
+      [initialLat]="initialLat"
+      [initialLon]="initialLon"
+      [initialZoom]="8"
+      [nearbyWines]="wineries()"
+      (mapBoundsChange)="onMapBoundsChange($event)">
+    </app-map>
+  </div>
+</div>

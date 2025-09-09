@@ -1,4 +1,4 @@
-const Wine = require('../models/Wine');
+const Wine = require('../../models/Wine');
 
 // @desc    Create a new wine
 exports.createWine = async (req, res) => {
@@ -46,6 +46,23 @@ exports.deleteWine = async (req, res) => {
     res.json({ msg: 'Wine removed' });
   } catch (err) {
     console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+};
+
+// @desc    Get a single wine by ID
+exports.getWineById = async (req, res) => {
+  try {
+    const wine = await Wine.findById(req.params.id);
+    if (!wine) {
+      return res.status(404).json({ msg: 'Wine not found' });
+    }
+    res.json(wine);
+  } catch (err) {
+    console.error(err.message);
+    if (err.kind === 'ObjectId') {
+      return res.status(404).json({ msg: 'Wine not found' });
+    }
     res.status(500).send('Server Error');
   }
 };

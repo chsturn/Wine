@@ -16,10 +16,22 @@ const wineSchema = new mongoose.Schema({
   alcoholPercentage: { type: Number, required: true },
   description: { type: String, required: true },
   price: { type: Number, default: null },
+  location: {
+    type: {
+      type: String,
+      enum: ['Point'],
+      default: 'Point'
+    },
+    coordinates: {
+      type: [Number], // [longitude, latitude]
+    }
+  },
   createdAt: {
     type: Date,
     default: Date.now
   }
 });
+
+wineSchema.index({ location: '2dsphere' });
 
 module.exports = mongoose.model('Wine', wineSchema);

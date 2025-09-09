@@ -1,6 +1,7 @@
 <div class="management-container">
   <h2>User Management</h2>
 
+  <div *ngIf="success()" class="alert alert-success">{{ success() }}</div>
   <div *ngIf="error()" class="alert alert-danger">{{ error() }}</div>
 
   <div class="user-table-container">

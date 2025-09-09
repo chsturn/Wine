@@ -16,6 +16,7 @@ export class UserManagementComponent implements OnInit {
 
   users: WritableSignal<User[]> = signal([]);
   error: WritableSignal<string | null> = signal(null);
+  success: WritableSignal<string | null> = signal(null);
   roles: string[] = ['User', 'Editor', 'Admin'];
 
   ngOnInit(): void {
@@ -34,6 +35,9 @@ export class UserManagementComponent implements OnInit {
 
   onRoleChange(user: User, event: Event): void {
     const newRole = (event.target as HTMLSelectElement).value;
+    this.error.set(null);
+    this.success.set(null);
+
     if (user._id) {
       this.adminService.updateUserRole(user._id, newRole).subscribe({
         next: () => {
@@ -41,6 +45,7 @@ export class UserManagementComponent implements OnInit {
           this.users.update(currentUsers =>
             currentUsers.map(u => u._id === user._id ? { ...u, role: newRole } : u)
           );
+          this.success.set(`Successfully updated ${user.username}'s role to ${newRole}.`);
         },
         error: (err) => {
           this.error.set(err.error.msg || 'Failed to update role');

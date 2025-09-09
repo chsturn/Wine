@@ -1,5 +1,6 @@
 import { Component, OnInit, inject, signal, WritableSignal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import { Wine } from '../models/wine.model';
 import { WineService } from '../wine.service';
 import { AuthService } from '../auth.service';
@@ -14,6 +15,7 @@ import { AuthService } from '../auth.service';
 export class WineListComponent implements OnInit {
   private wineService = inject(WineService);
   private authService = inject(AuthService);
+  private router = inject(Router);
   public wines: WritableSignal<Wine[]> = signal([]);
   public error: WritableSignal<string | null> = signal(null);
 
@@ -35,7 +37,6 @@ export class WineListComponent implements OnInit {
 
   deleteWine(id: string): void {
     if (confirm('Are you sure you want to delete this wine?')) {
-      // Assumes deleteWine exists on WineService
       this.wineService.deleteWine(id).subscribe({
         next: () => {
           this.loadWines(); // Refresh the list after deleting
@@ -46,5 +47,10 @@ export class WineListComponent implements OnInit {
         }
       });
     }
+  }
+
+  editWine(id: string): void {
+    // Navigate to a new edit page. The form component can be reused for editing.
+    this.router.navigate(['/wines', id, 'edit']);
   }
 }

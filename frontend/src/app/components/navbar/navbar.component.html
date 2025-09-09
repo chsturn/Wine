@@ -4,6 +4,9 @@
     <li class="nav-item">
       <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
     </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/nearby-wineries" routerLinkActive="active">Weingüter in ihrer Nähe</a>
+    </li>
 
     <!-- Show if user is NOT logged in -->
     <ng-container *ngIf="!isLoggedIn()">

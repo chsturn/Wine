@@ -1,0 +1,42 @@
+<div *ngIf="wine() as w; else loadingOrError" class="detail-container">
+  <div class="main-details">
+    <h1>{{ w.name }} ({{ w.year }})</h1>
+    <h2>{{ w.winery }} - {{ w.region }}</h2>
+    <p class="description">{{ w.description }}</p>
+  </div>
+
+  <div class="grid-container">
+    <div class="grid-item">
+      <h3>Characteristics</h3>
+      <ul>
+        <li><strong>Grape:</strong> {{ w.grapeVariety }}</li>
+        <li><strong>Aroma:</strong> {{ w.aroma.join(', ') }}</li>
+        <li><strong>Taste:</strong> {{ w.taste.join(', ') }}</li>
+        <li><strong>Alcohol:</strong> {{ w.alcoholPercentage }}%</li>
+        <li *ngIf="w.oakAging?.oakType">
+          <strong>Oak Aging:</strong> {{ w.oakAging.oakType }} for {{ w.oakAging.durationMonths }} months
+        </li>
+      </ul>
+    </div>
+    <div class="grid-item">
+      <h3>Pairing & Price</h3>
+      <ul>
+        <li><strong>Food Pairing:</strong> {{ w.foodPairing.join(', ') }}</li>
+        <li *ngIf="w.price"><strong>Price:</strong> ${{ w.price }}</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="map-section">
+    <h3>Winery Location</h3>
+    <app-map [mainWine]="w" [nearbyWines]="nearbyWines()"></app-map>
+  </div>
+
+</div>
+
+<ng-template #loadingOrError>
+  <div *ngIf="error()" class="alert alert-danger">{{ error() }}</div>
+  <div *ngIf="!error()">
+    <p>Loading wine details...</p>
+  </div>
+</ng-template>

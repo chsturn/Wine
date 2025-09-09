@@ -5,9 +5,10 @@
 </div>
 
 <div *ngIf="wines().length > 0; else noWines" class="wine-grid">
-  <div *ngFor="let wine of wines()" class="wine-card">
-    <div class="wine-details">
-      <h3>{{ wine.name }} ({{ wine.year }})</h3>
+  <a *ngFor="let wine of wines()" [routerLink]="['/wines', wine._id]" class="wine-card-link">
+    <div class="wine-card">
+      <div class="wine-details">
+        <h3>{{ wine.name }} ({{ wine.year }})</h3>
       <p><strong>Winery:</strong> {{ wine.winery }}</p>
       <p><strong>Region:</strong> {{ wine.region }}</p>
       <p><strong>Grape:</strong> {{ wine.grapeVariety }}</p>
@@ -15,11 +16,12 @@
       <p><strong>Description:</strong> {{ wine.description }}</p>
 
       <div *ngIf="isEditor()" class="card-actions">
-        <button class="btn-edit">Edit</button>
-        <button class="btn-delete" (click)="deleteWine(wine._id!)">Delete</button>
+        <button class="btn-edit" (click)="$event.stopPropagation(); editWine(wine._id!)">Edit</button>
+        <button class="btn-delete" (click)="$event.stopPropagation(); deleteWine(wine._id!)">Delete</button>
       </div>
     </div>
-  </div>
+    </div>
+  </a>
 </div>
 
 <ng-template #noWines>

@@ -1,0 +1,20 @@
+.nearby-container {
+  padding: 1rem;
+}
+
+.map-wrapper {
+  height: 75vh; /* Make map take up most of the viewport height */
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.alert {
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 4px;
+}
+
+.alert-warning {
+  background-color: #fff3cd;
+  color: #856404;
+}

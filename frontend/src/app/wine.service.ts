@@ -16,6 +16,10 @@ export class WineService {
     return this.http.get<Wine[]>(this.apiUrl);
   }
 
+  getWineById(id: string): Observable<Wine> {
+    return this.http.get<Wine>(`${this.apiUrl}/${id}`);
+  }
+
   private aiApiUrl = 'http://localhost:3000/api/ai';
 
   createWine(wine: Wine): Observable<Wine> {
@@ -41,5 +45,28 @@ export class WineService {
       'x-auth-token': this.authService.getToken() || ''
     });
     return this.http.delete<{ msg: string }>(`${this.apiUrl}/${id}`, { headers });
+  }
+
+  private geoApiUrl = 'http://localhost:3000/api/geo';
+
+  updateWine(id: string, wine: Partial<Wine>): Observable<Wine> {
+    const headers = new HttpHeaders({
+      'x-auth-token': this.authService.getToken() || ''
+    });
+    return this.http.put<Wine>(`${this.apiUrl}/${id}`, wine, { headers });
+  }
+
+  getWinesNearby(lat: number, lon: number, dist: number = 10000): Observable<Wine[]> {
+    return this.http.get<Wine[]>(`${this.geoApiUrl}/nearby?lat=${lat}&lon=${lon}&dist=${dist}`);
+  }
+
+  getWinesWithinBounds(bounds: any): Observable<Wine[]> {
+    const params = {
+        sw_lon: bounds.getSouthWest().lng,
+        sw_lat: bounds.getSouthWest().lat,
+        ne_lon: bounds.getNorthEast().lng,
+        ne_lat: bounds.getNorthEast().lat
+    };
+    return this.http.get<Wine[]>(`${this.geoApiUrl}/within-bounds`, { params });
   }
 }

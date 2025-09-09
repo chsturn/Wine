@@ -3,8 +3,13 @@ export interface OakAging {
   durationMonths: number | null;
 }
 
+export interface GeoLocation {
+  type?: 'Point';
+  coordinates: [number, number]; // [longitude, latitude]
+}
+
 export interface Wine {
-  _id?: string; // Mongoose adds _id automatically
+  _id?: string;
   name: string;
   year: number;
   winery: string;
@@ -17,5 +22,6 @@ export interface Wine {
   alcoholPercentage: number;
   description: string;
   price?: number | null;
+  location?: GeoLocation;
   createdAt?: Date;
 }
