@@ -7,25 +7,25 @@ const {
   login2FA,
   setup2FA,
   verify2FA,
-  disable2FA
-} = require('../controllers/users'); // Updated path
+  disable2FA,
+  getProfile,
+  updateProfile,
+  changePassword
+} = require('../controllers/users');
 
-// @route   POST api/users/register
+// --- Auth Routes ---
 router.post('/register', register);
-
-// @route   POST api/users/login
 router.post('/login', login);
 
-// @route   POST api/users/2fa/login
+// --- 2FA Routes ---
 router.post('/2fa/login', login2FA);
-
-// @route   POST api/users/2fa/setup
 router.post('/2fa/setup', auth, setup2FA);
-
-// @route   POST api/users/2fa/verify
 router.post('/2fa/verify', auth, verify2FA);
-
-// @route   POST api/users/2fa/disable
 router.post('/2fa/disable', auth, disable2FA);
+
+// --- Profile Routes ---
+router.get('/me', auth, getProfile);
+router.put('/me', auth, updateProfile);
+router.put('/change-password', auth, changePassword);
 
 module.exports = router;

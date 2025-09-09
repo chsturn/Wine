@@ -110,4 +110,18 @@ export class AuthService {
   disable2FA(password: string): Observable<{ msg: string }> {
     return this.http.post<{ msg: string }>(`${this.apiUrl}/2fa/disable`, { password }, { headers: this.getAuthHeaders() });
   }
+
+  // --- Profile Management Methods ---
+
+  getProfile(): Observable<User> {
+    return this.http.get<User>(`${this.apiUrl}/me`, { headers: this.getAuthHeaders() });
+  }
+
+  updateProfile(profileData: Partial<User>): Observable<User> {
+    return this.http.put<User>(`${this.apiUrl}/me`, profileData, { headers: this.getAuthHeaders() });
+  }
+
+  changePassword(passwordData: any): Observable<{ msg: string }> {
+    return this.http.put<{ msg: string }>(`${this.apiUrl}/change-password`, passwordData, { headers: this.getAuthHeaders() });
+  }
 }

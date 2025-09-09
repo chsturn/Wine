@@ -3,4 +3,7 @@ export interface User {
   username: string;
   password?: string; // Optional on the frontend model
   role?: string;
+  firstname?: string;
+  lastname?: string;
+  birthdate?: Date;
 }

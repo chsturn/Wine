@@ -11,6 +11,17 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  firstname: {
+    type: String,
+    trim: true
+  },
+  lastname: {
+    type: String,
+    trim: true
+  },
+  birthdate: {
+    type: Date
+  },
   twoFactorSecret: {
     type: String,
   },

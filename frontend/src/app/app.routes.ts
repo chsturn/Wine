@@ -2,13 +2,13 @@ import { Routes } from '@angular/router';
 import { WineListComponent } from './wine-list/wine-list.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
-import { TwoFactorSetupComponent } from './components/two-factor-setup/two-factor-setup.component';
+import { AccountSettingsComponent } from './components/account-settings/account-settings.component';
 import { Login2faComponent } from './components/login-2fa/login-2fa.component';
 import { WineFormComponent } from './components/wine-form/wine-form.component';
 import { LabelUploadComponent } from './components/label-upload/label-upload.component';
 import { UserManagementComponent } from './components/user-management/user-management.component';
 import { adminGuard } from './admin.guard';
-import { authGuard } from './auth.guard'; // I need to create this guard too
+import { authGuard } from './auth.guard';
 
 export const routes: Routes = [
   { path: '', component: WineListComponent },
@@ -26,8 +26,8 @@ export const routes: Routes = [
     canActivate: [authGuard]
   },
   {
-    path: 'settings/security',
-    component: TwoFactorSetupComponent,
+    path: 'settings/account',
+    component: AccountSettingsComponent,
     canActivate: [authGuard]
   },
   {
