@@ -20,7 +20,7 @@ export class WineService {
     return this.http.get<Wine>(`${this.apiUrl}/${id}`);
   }
 
-  private aiApiUrl = 'http://localhost:8000';
+  private aiApiUrl = 'http://localhost:3000/api/ai';
 
   createWine(wine: Wine): Observable<Wine> {
     const headers = new HttpHeaders({
