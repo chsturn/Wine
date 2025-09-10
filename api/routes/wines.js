@@ -7,7 +7,8 @@ const {
   getAllWines,
   getWineById,
   updateWine,
-  deleteWine
+  deleteWine,
+  rateWine
 } = require('../controllers/wines/wineController');
 
 // @desc    Get all wines
@@ -17,6 +18,10 @@ router.get('/', getAllWines);
 // @desc    Get a single wine by ID
 // @access  Public
 router.get('/:id', getWineById);
+
+// @desc    Rate a wine
+// @access  Private
+router.post('/:id/rate', auth, rateWine);
 
 // @desc    Create a new wine
 // @access  Private (Admin, Editor)

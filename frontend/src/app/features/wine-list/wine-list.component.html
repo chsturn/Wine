@@ -15,6 +15,11 @@
       <p><strong>Alcohol:</strong> {{ wine.alcoholPercentage }}%</p>
       <p><strong>Description:</strong> {{ wine.description }}</p>
 
+      <app-average-rating
+        [averageRating]="wine.averageRating || 0"
+        [ratingsCount]="wine.ratingsCount || 0">
+      </app-average-rating>
+
       <div *ngIf="isEditor()" class="card-actions">
         <button class="btn-edit" (click)="$event.stopPropagation(); editWine(wine._id!)">Edit</button>
         <button class="btn-delete" (click)="$event.stopPropagation(); deleteWine(wine._id!)">Delete</button>

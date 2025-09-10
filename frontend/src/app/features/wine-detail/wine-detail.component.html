@@ -2,6 +2,16 @@
   <div class="main-details">
     <h1>{{ w.name }} ({{ w.year }})</h1>
     <h2>{{ w.winery }} - {{ w.region }}</h2>
+
+    <div class="rating-section">
+      <h3>Average Rating</h3>
+      <app-star-rating [rating]="w.averageRating || 0" [readonly]="true"></app-star-rating>
+      <span>({{ w.ratingsCount || 0 }} ratings)</span>
+
+      <h3>Your Rating</h3>
+      <app-star-rating [rating]="userRating()" (ratingChange)="onRatingChange($event)"></app-star-rating>
+    </div>
+
     <p class="description">{{ w.description }}</p>
   </div>
 
