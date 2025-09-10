@@ -1,61 +1,80 @@
 /* Mobile First Styles */
 .navbar {
   display: flex;
-  flex-wrap: wrap; /* Allow items to wrap to the next line */
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  background-color: #333;
-  padding: 1rem; /* Increase padding for easier tapping */
-  color: white;
-  gap: 1rem; /* Add gap between brand and nav links when they wrap */
+  background-color: var(--background-color);
+  padding: 1rem;
+  color: var(--text-color);
+  gap: 1rem;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  box-shadow: 7px 7px 15px var(--dark-shadow),
+              -7px -7px 15px var(--light-shadow);
 }
 
 .navbar-brand {
   font-size: 1.5rem;
-  color: white;
+  font-weight: 600;
+  color: var(--text-color);
   text-decoration: none;
-  flex-shrink: 0; /* Prevent the brand from shrinking */
+  flex-shrink: 0;
 }
 
 .navbar-nav {
   list-style: none;
   display: flex;
-  flex-wrap: wrap; /* Allow nav items to wrap */
-  justify-content: center; /* Center items when they wrap */
+  flex-wrap: wrap;
+  justify-content: center;
   margin: 0;
   padding: 0;
-  gap: 0.5rem 1rem; /* Add gap for wrapped items */
+  gap: 0.5rem 1rem;
 }
 
 .nav-item {
-  margin-left: 0; /* Remove fixed margin */
+  margin-left: 0;
 }
 
 .nav-link {
-  color: white;
+  color: var(--text-color);
   text-decoration: none;
-  padding: 0.5rem;
-  display: block; /* Make links easier to tap */
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  display: block;
   text-align: center;
+  transition: all 0.2s ease-in-out;
 }
 
 .nav-link.active {
   font-weight: bold;
-  border-bottom: 2px solid white;
+  box-shadow: inset 3px 3px 7px var(--dark-shadow),
+              inset -3px -3px 7px var(--light-shadow);
+}
+
+.nav-link:not(.active):hover {
+  box-shadow: 5px 5px 10px var(--dark-shadow),
+              -5px -5px 10px var(--light-shadow);
 }
 
 .nav-link-button {
-  background: none;
+  background: var(--background-color);
   border: none;
-  color: white;
-  padding: 0.5rem;
+  color: var(--text-color);
+  padding: 0.5rem 1rem;
   font-family: inherit;
-  font-size: 1rem; /* Ensure consistent font size */
+  font-size: 1rem;
   cursor: pointer;
+  border-radius: 8px;
+  font-weight: 600;
+  box-shadow: 5px 5px 10px var(--dark-shadow),
+              -5px -5px 10px var(--light-shadow);
+  transition: all 0.2s ease-in-out;
 }
 
 .nav-link-button:hover {
-  text-decoration: underline;
+  box-shadow: inset 3px 3px 7px var(--dark-shadow),
+              inset -3px -3px 7px var(--light-shadow);
 }
 
 /* Tablet and Desktop Styles */

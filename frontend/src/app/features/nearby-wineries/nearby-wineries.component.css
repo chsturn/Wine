@@ -1,20 +1,45 @@
 .nearby-container {
-  padding: 1rem;
+  padding: 2rem;
+  background-color: var(--background-color);
+  border-radius: 20px;
+  box-shadow: 10px 10px 20px var(--dark-shadow),
+              -10px -10px 20px var(--light-shadow);
+  text-align: center;
+}
+
+h2 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+}
+
+p {
+    margin-bottom: 2rem;
+    color: #555;
 }
 
 .map-wrapper {
-  height: 75vh; /* Make map take up most of the viewport height */
+  height: 75vh;
   width: 100%;
   margin-top: 1rem;
+  border-radius: 15px;
+  overflow: hidden;
+  background-color: var(--background-color);
+  box-shadow: 7px 7px 15px var(--dark-shadow),
+              -7px -7px 15px var(--light-shadow);
 }
 
 .alert {
   padding: 1rem;
   margin-bottom: 1rem;
-  border-radius: 4px;
+  border-radius: 8px;
+  font-weight: 600;
+  text-align: center;
+  background-color: var(--background-color);
+  box-shadow: 5px 5px 10px var(--dark-shadow),
+              -5px -5px 10px var(--light-shadow);
 }
 
 .alert-warning {
-  background-color: #fff3cd;
   color: #856404;
 }
