@@ -1,0 +1,10 @@
+.average-rating-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.ratings-count {
+  font-size: 0.9rem;
+  color: #6c757d;
+}

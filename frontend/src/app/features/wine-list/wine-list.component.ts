@@ -4,11 +4,12 @@ import { Router, RouterModule } from '@angular/router';
 import { Wine } from '../../shared/models/wine.model';
 import { WineService } from '../../core/services/wine.service';
 import { AuthService } from '../../core/services/auth.service';
+import { AverageRatingComponent } from '../../shared/components/average-rating/average-rating.component';
 
 @Component({
   selector: 'app-wine-list',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, AverageRatingComponent],
   templateUrl: './wine-list.component.html',
   styleUrls: ['./wine-list.component.css']
 })

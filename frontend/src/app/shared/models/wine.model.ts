@@ -8,6 +8,12 @@ export interface GeoLocation {
   coordinates: [number, number]; // [longitude, latitude]
 }
 
+export interface Rating {
+  userId: string;
+  rating: number;
+  _id: string;
+}
+
 export interface Wine {
   _id?: string;
   name: string;
@@ -23,5 +29,8 @@ export interface Wine {
   description: string;
   price?: number | null;
   location?: GeoLocation;
+  averageRating?: number;
+  ratingsCount?: number;
+  userRating?: number;
   createdAt?: Date;
 }

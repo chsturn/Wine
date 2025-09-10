@@ -69,4 +69,11 @@ export class WineService {
     };
     return this.http.get<Wine[]>(`${this.geoApiUrl}/within-bounds`, { params });
   }
+
+  rateWine(id: string, rating: number): Observable<Wine> {
+    const headers = new HttpHeaders({
+      'x-auth-token': this.authService.getToken() || ''
+    });
+    return this.http.post<Wine>(`${this.apiUrl}/${id}/rate`, { rating }, { headers });
+  }
 }
