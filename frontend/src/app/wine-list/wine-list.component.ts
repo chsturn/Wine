@@ -1,6 +1,6 @@
 import { Component, OnInit, inject, signal, WritableSignal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { Wine } from '../models/wine.model';
 import { WineService } from '../wine.service';
 import { AuthService } from '../auth.service';
@@ -8,7 +8,7 @@ import { AuthService } from '../auth.service';
 @Component({
   selector: 'app-wine-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './wine-list.component.html',
   styleUrls: ['./wine-list.component.css']
 })

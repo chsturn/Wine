@@ -13,7 +13,7 @@
         <li><strong>Aroma:</strong> {{ w.aroma.join(', ') }}</li>
         <li><strong>Taste:</strong> {{ w.taste.join(', ') }}</li>
         <li><strong>Alcohol:</strong> {{ w.alcoholPercentage }}%</li>
-        <li *ngIf="w.oakAging?.oakType">
+        <li *ngIf="w.oakAging">
           <strong>Oak Aging:</strong> {{ w.oakAging.oakType }} for {{ w.oakAging.durationMonths }} months
         </li>
       </ul>
