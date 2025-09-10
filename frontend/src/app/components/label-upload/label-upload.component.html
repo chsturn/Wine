@@ -1,0 +1,25 @@
+<div class="upload-container">
+  <h2>Analyze Wine Label</h2>
+  <p>Upload an image of a wine label, and we'll try to fill out the form for you.</p>
+
+  <div class="upload-area">
+    <input type="file" (change)="onFileSelected($event)" accept="image/*" #fileInput>
+    <button (click)="fileInput.click()" class="btn-browse">Browse for Image</button>
+  </div>
+
+  <div *ngIf="previewUrl" class="preview-area">
+    <h4>Image Preview</h4>
+    <img [src]="previewUrl" alt="Label preview">
+  </div>
+
+  <div *ngIf="selectedFile" class="upload-actions">
+    <button (click)="onUpload()" [disabled]="isLoading()">
+      <span *ngIf="!isLoading()">Analyze Label</span>
+      <span *ngIf="isLoading()">Analyzing...</span>
+    </button>
+  </div>
+
+  <div *ngIf="error()" class="alert alert-danger">
+    {{ error() }}
+  </div>
+</div>

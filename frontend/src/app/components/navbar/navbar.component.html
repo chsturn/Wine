@@ -1,0 +1,48 @@
+<nav class="navbar">
+  <a class="navbar-brand" routerLink="/">Wine App</a>
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/nearby-wineries" routerLinkActive="active">Weingüter in ihrer Nähe</a>
+    </li>
+
+    <!-- Show if user is NOT logged in -->
+    <ng-container *ngIf="!isLoggedIn()">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/login" routerLinkActive="active">Login</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/register" routerLinkActive="active">Register</a>
+      </li>
+    </ng-container>
+
+    <!-- Show if user IS logged in -->
+    <ng-container *ngIf="isLoggedIn()">
+      <!-- Editor & Admin links -->
+      <ng-container *ngIf="isEditor()">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/wines/upload" routerLinkActive="active">Upload Label</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/wines/new" routerLinkActive="active">Add Manually</a>
+        </li>
+      </ng-container>
+
+      <!-- Admin only links -->
+      <ng-container *ngIf="isAdmin()">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/admin/users" routerLinkActive="active">User Management</a>
+        </li>
+      </ng-container>
+
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/settings/account" routerLinkActive="active">Account</a>
+      </li>
+      <li class="nav-item">
+        <button class="nav-link-button" (click)="logout()">Logout</button>
+      </li>
+    </ng-container>
+  </ul>
+</nav>
