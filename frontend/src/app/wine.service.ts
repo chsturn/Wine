@@ -20,7 +20,7 @@ export class WineService {
     return this.http.get<Wine>(`${this.apiUrl}/${id}`);
   }
 
-  private aiApiUrl = 'http://localhost:3000/api/ai';
+  private aiApiUrl = 'http://localhost:8001';
 
   createWine(wine: Wine): Observable<Wine> {
     const headers = new HttpHeaders({
@@ -31,7 +31,7 @@ export class WineService {
 
   analyzeLabel(file: File): Observable<Partial<Wine>> {
     const formData = new FormData();
-    formData.append('labelImage', file);
+    formData.append('file', file);
 
     const headers = new HttpHeaders({
       'x-auth-token': this.authService.getToken() || ''

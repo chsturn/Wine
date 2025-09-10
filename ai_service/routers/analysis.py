@@ -1,4 +1,5 @@
 import base64
+import json
 import httpx
 from fastapi import APIRouter, UploadFile, File, HTTPException
 from ..models import WineData
@@ -28,15 +29,17 @@ async def analyze_label(file: UploadFile = File(...)):
 
     - "aroma", "taste", and "foodPairing" must be arrays of strings.
     - "oakAging" must be an object with "oakType" (string) and "durationMonths" (integer).
+    - description must be a concise summary of the wine's characteristics.
     - If a value cannot be determined from the label, set its value to null.
     """
 
     payload = {
-        "model": "llava",
+        "model": "llava:34b",
         "prompt": prompt,
         "images": [base64_image],
         "stream": False,
-        "format": "json"
+        "format": "json",
+        "temperature": 0.3,
     }
 
     OLLAMA_API_URL = "http://localhost:11434/api/generate"
@@ -45,8 +48,9 @@ async def analyze_label(file: UploadFile = File(...)):
         async with httpx.AsyncClient(timeout=60.0) as client:
             response = await client.post(OLLAMA_API_URL, json=payload)
             response.raise_for_status()
+            response_data = response.json().get("response", {})
 
-        return response.json()
+        return json.loads(response_data)
 
     except httpx.RequestError as e:
         raise HTTPException(status_code=503, detail=f"Could not connect to Ollama service: {e}")

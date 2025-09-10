@@ -1,0 +1,47 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+*.pyo
+*.pyd
+*.pdb
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+.env
+.venv
+env/
+venv/
+ENV/
+Pipfile.lock
+poetry.lock
+*.sqlite3
+*.log
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*.bak
+*.tmp
+# Jupyter Notebook
+.ipynb_checkpoints/
+# VS Code
+.history/
+# mypy
+.mypy_cache/
+# pytest
+.pytest_cache/
+# coverage
+.coverage
+htmlcov/
+# pyright
+.pyright/
+# local env
+.envrc
+.env.*
+# macOS
+*.DS_Store
