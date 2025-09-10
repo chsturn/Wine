@@ -19,6 +19,11 @@ export const routes: Routes = [
     component: WineFormComponent,
     canActivate: [authGuard]
   },
+  {
+    path: 'wines/upload',
+    component: LabelUploadComponent,
+    canActivate: [authGuard]
+  },
   { path: 'wines/:id', component: WineDetailComponent },
   { path: 'nearby-wineries', component: NearbyWineriesComponent },
   { path: 'login', component: LoginComponent },
@@ -27,11 +32,6 @@ export const routes: Routes = [
   {
     path: 'wines/:id/edit',
     component: WineFormComponent,
-    canActivate: [authGuard]
-  },
-  {
-    path: 'wines/upload',
-    component: LabelUploadComponent,
     canActivate: [authGuard]
   },
   {
