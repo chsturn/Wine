@@ -28,7 +28,7 @@ export class AuthService {
 
   private token = signal<string | null>(localStorage.getItem('token'));
   private tfaToken = signal<string | null>(null);
-  userRole = computed(() => this.getRoleFromToken(this.token()));
+  private userRole = signal<string | null>(this.getRoleFromToken(this.token()));
 
   isLoggedIn = computed(() => this.token() !== null);
   isAdmin = computed(() => this.userRole() === 'Admin');
@@ -37,6 +37,7 @@ export class AuthService {
   constructor() {
     effect(() => {
       const currentToken = this.token();
+      this.userRole.set(this.getRoleFromToken(currentToken));
       if (currentToken) {
         localStorage.setItem('token', currentToken);
       } else {

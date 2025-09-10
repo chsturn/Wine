@@ -12,8 +12,6 @@ declare var L: any;
   styleUrls: ['./map.component.css']
 })
 export class MapComponent implements AfterViewInit, OnChanges {
-  latitude: number | undefined;
-  longitude: number | undefined;
   @Input() mainWine: Wine | null = null;
   @Input() nearbyWines: Wine[] = [];
   @Input() initialLat: number = 47.3769; // Default to Zurich
@@ -30,10 +28,6 @@ export class MapComponent implements AfterViewInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['initialLat'] || changes['initialLon']) {
-      this.latitude = this.initialLat;
-      this.longitude = this.initialLon;
-    }
     if (this.map && (changes['mainWine'] || changes['nearbyWines'])) {
       this.updateMarkers();
     }

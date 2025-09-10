@@ -14,24 +14,24 @@ import { authGuard } from './auth.guard';
 
 export const routes: Routes = [
   { path: '', component: WineListComponent },
-  {
-    path: 'wines/new',
-    component: WineFormComponent,
-    canActivate: [authGuard]
-  },
-  {
-    path: 'wines/upload',
-    component: LabelUploadComponent,
-    canActivate: [authGuard]
-  },
   { path: 'wines/:id', component: WineDetailComponent },
   { path: 'nearby-wineries', component: NearbyWineriesComponent },
   { path: 'login', component: LoginComponent },
   { path: 'login/2fa', component: Login2faComponent },
   { path: 'register', component: RegisterComponent },
   {
+    path: 'wines/new',
+    component: WineFormComponent,
+    canActivate: [authGuard]
+  },
+  {
     path: 'wines/:id/edit',
     component: WineFormComponent,
+    canActivate: [authGuard]
+  },
+  {
+    path: 'wines/upload',
+    component: LabelUploadComponent,
     canActivate: [authGuard]
   },
   {
