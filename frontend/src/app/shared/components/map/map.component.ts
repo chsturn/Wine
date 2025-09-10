@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter, AfterViewInit, OnChanges, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Wine } from '../..//models/wine.model';
+import { Wine } from '../../models/wine.model';
 
 declare var L: any;
 
